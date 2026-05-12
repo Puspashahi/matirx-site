@@ -239,3 +239,18 @@ https://www.linkedin.com/in/puspa-shahi/
 
 ---
 
+---
+
+# Support
+
+If you like this project and found it useful for your cybersecurity learning, labs, or CTF workflow, consider supporting the project by giving it a ⭐ on GitHub.
+
+Your support helps motivate future improvements and new security tools.
+
+```text
+⭐ Give this repository a star
+```
+
+Thank you for supporting MATRIX.
+
+---
