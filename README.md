@@ -234,7 +234,7 @@ https://github.com/Puspashahi
 
 LinkedIn:
 ```text
-https://www.linkedin.com/in/puspa-shahi-224987285/
+https://www.linkedin.com/in/puspa-shahi/
 ```
 
 ---
