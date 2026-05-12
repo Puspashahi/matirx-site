@@ -166,30 +166,6 @@ The build script will:
 
 ---
 
-# GitHub Pages Deployment
-
-Push the project:
-
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/matrix.git
-git push -u origin main
-```
-
-Enable GitHub Pages:
-
-- Repository Settings
-- Pages
-- Deploy from branch
-- Select `main` and `/root`
-
-Your static site will be live.
-
----
-
 # Sample Sections
 
 - Recon
