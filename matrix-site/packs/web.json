@@ -1,0 +1,13 @@
+[
+  {"section":"Web","category":"Content Discovery","title":"Gobuster directory scan","command":"gobuster dir -u http://{{IP}}:{{PORT}} -w wordlists/common.txt -x php,txt,html","description":"Discover content on a lab web server."},
+  {"section":"Web","category":"Content Discovery","title":"Recursive ffuf","command":"ffuf -u http://{{DOMAIN}}/FUZZ -w wordlists/common.txt -recursion -recursion-depth 2","description":"Recursive content discovery on permitted target."},
+  {"section":"Web","category":"Virtual Hosts","title":"Vhost fuzzing","command":"ffuf -u http://{{IP}}/ -H 'Host: FUZZ.{{DOMAIN}}' -w wordlists/subdomains.txt -fs 0","description":"Find virtual hosts in a CTF/lab."},
+  {"section":"Web","category":"Parameters","title":"Parameter fuzzing GET","command":"ffuf -u 'http://{{IP}}:{{PORT}}/index.php?FUZZ=test' -w wordlists/params.txt","description":"Discover reflected or accepted GET parameters."},
+  {"section":"Web","category":"HTTP","title":"POST form test","command":"curl -X POST http://{{IP}}:{{PORT}}/login -d 'username={{USERNAME}}&password={{PASSWORD}}' -i","description":"Send a lab login form request."},
+  {"section":"Web","category":"HTTP","title":"Save response body","command":"curl -s http://{{IP}}:{{PORT}}/ -o response.html","description":"Save response for offline review."},
+  {"section":"Web","category":"Security Headers","title":"Check security headers","command":"curl -I https://{{DOMAIN}} | grep -Ei 'strict|content-security|x-frame|x-content|referrer'","description":"Review common defensive headers."},
+  {"section":"Web","category":"TLS","title":"TLS quick check","command":"testssl.sh https://{{DOMAIN}}","description":"Check TLS configuration when authorized."},
+  {"section":"Web","category":"Nikto","title":"Nikto basic scan","command":"nikto -h http://{{IP}}:{{PORT}}","description":"Run a basic web server check in labs."},
+  {"section":"Web","category":"WordPress","title":"WPScan enumerate users","command":"wpscan --url http://{{DOMAIN}} --enumerate u","description":"Enumerate WordPress users in an authorized lab."},
+  {"section":"Web","category":"WordPress","title":"WPScan plugins","command":"wpscan --url http://{{DOMAIN}} --enumerate p","description":"Enumerate plugins in an authorized lab."}
+]

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Matrix Command Library</title>
+  <meta name="description" content="Static command library for authorized pentesting labs, CTFs, and security training." />
+  <link rel="stylesheet" href="src/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Authorized labs • CTFs • Security training</p>
+      <h1>Matrix</h1>
+      <p class="subtitle">Search, filter, personalize placeholders, and copy useful commands fast. Fully static. No backend. No accounts. No telemetry.</p>
+    </div>
+    <div class="hero-card">
+      <strong>Safety note</strong>
+      <p>Use these commands only on systems you own or have clear written permission to test.</p>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel controls" aria-label="Controls">
+      <label>
+        Search commands
+        <input id="searchInput" type="search" placeholder="nmap, curl, jwt, linux..." autocomplete="off" />
+      </label>
+
+      <div class="grid-2">
+        <label>
+          Section
+          <select id="sectionFilter"></select>
+        </label>
+        <label>
+          Category
+          <select id="categoryFilter"></select>
+        </label>
+      </div>
+
+      <div class="grid-2">
+        <label>
+          Sort
+          <select id="sortSelect">
+            <option value="section">Section</option>
+            <option value="title">Title</option>
+            <option value="category">Category</option>
+          </select>
+        </label>
+        <label>
+          Per page
+          <select id="pageSizeSelect">
+            <option>6</option>
+            <option selected>10</option>
+            <option>20</option>
+            <option>50</option>
+          </select>
+        </label>
+      </div>
+
+      <section class="placeholder-box">
+        <div class="section-title">
+          <h2>Live placeholders</h2>
+          <button id="clearPlaceholders" class="ghost">Clear</button>
+        </div>
+        <div id="placeholderInputs" class="placeholder-inputs"></div>
+        <p class="hint">Type once here. Every command using that placeholder updates instantly and stays after refresh.</p>
+      </section>
+
+      <button id="resetAll" class="danger">Reset filters</button>
+    </aside>
+
+    <section class="content">
+      <div class="toolbar panel">
+        <div>
+          <strong id="resultCount">0 commands</strong>
+          <p id="activeSummary">Ready</p>
+        </div>
+        <div class="toolbar-actions">
+          <a href="dist/commands.csv" class="button" download>Export CSV</a>
+          <a href="dist/stats.json" class="button" target="_blank" rel="noreferrer">Stats</a>
+        </div>
+      </div>
+
+      <div id="commandList" class="command-list"></div>
+      <nav class="pagination panel" aria-label="Pagination">
+        <button id="prevPage">Previous</button>
+        <span id="pageInfo">Page 1</span>
+        <button id="nextPage">Next</button>
+      </nav>
+    </section>
+  </main>
+
+  <template id="commandTemplate">
+    <article class="command-card">
+      <div class="card-top">
+        <div>
+          <p class="meta"></p>
+          <h3></h3>
+        </div>
+        <button class="copy-btn">Copy</button>
+      </div>
+      <p class="description"></p>
+      <pre><code></code></pre>
+      <div class="chips"></div>
+    </article>
+  </template>
+
+  <script src="src/data.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+id,section,category,title,command,description,placeholders,pack
+api-cors-cors-origin-check,Api,CORS,CORS origin check,curl -H 'Origin: https://evil.example' -I https://{{DOMAIN}}/api/profile,Check CORS response behavior safely.,DOMAIN,api
+api-discovery-common-api-paths,Api,Discovery,Common API paths,ffuf -u https://{{DOMAIN}}/FUZZ -w wordlists/api-paths.txt -mc all,Discover common API paths in a permitted lab.,DOMAIN,api
+api-discovery-fetch-openapi-spec,Api,Discovery,Fetch OpenAPI spec,curl -s https://{{DOMAIN}}/openapi.json | jq .,Retrieve and format an API spec where exposed intentionally.,DOMAIN,api
+api-graphql-graphql-introspection-query,Api,GraphQL,GraphQL introspection query,"curl -X POST https://{{DOMAIN}}/graphql -H 'Content-Type: application/json' -d '{""query"":""{__schema{types{name}}}""}'",Check GraphQL introspection in authorized labs.,DOMAIN,api
+api-http-get-with-bearer-token,Api,HTTP,GET with bearer token,curl -H 'Authorization: Bearer {{TOKEN}}' https://{{DOMAIN}}/api/me -i,Send an authenticated API request.,"DOMAIN,TOKEN",api
+api-http-post-json-login,Api,HTTP,POST JSON login,"curl -X POST https://{{DOMAIN}}/api/login -H 'Content-Type: application/json' -d '{""username"":""{{USERNAME}}"",""password"":""{{PASSWORD}}""}' -i",Send JSON login request in a lab.,"DOMAIN,PASSWORD,USERNAME",api
+api-idor-lab-change-object-id-manually,Api,IDOR Lab,Change object id manually,curl -H 'Authorization: Bearer {{TOKEN}}' https://{{DOMAIN}}/api/users/{{USER_ID}} -i,Authorized lab test for object-level authorization.,"DOMAIN,TOKEN,USER_ID",api
+api-jwt-decode-jwt-locally,Api,JWT,Decode JWT locally,"python3 - <<'PY'
+import jwt
+print(jwt.decode('{{TOKEN}}', options={""verify_signature"": False}))
+PY",Decode token claims locally without verification.,TOKEN,api
+api-methods-options-method,Api,Methods,OPTIONS method,curl -X OPTIONS https://{{DOMAIN}}/api/users -i,Check allowed HTTP methods.,DOMAIN,api
+api-rate-limit-simple-rate-limit-loop,Api,Rate Limit,Simple rate-limit loop,for i in $(seq 1 20); do curl -s -o /dev/null -w '%{http_code}\n' https://{{DOMAIN}}/api/login; done,Check whether a lab endpoint returns limiting responses.,DOMAIN,api
+ctf-crypto-rot13,Ctf,Crypto,ROT13,echo 'grkg' | tr 'A-Za-z' 'N-ZA-Mn-za-m',Decode ROT13 text.,,ctf
+ctf-encoding-base64-decode,Ctf,Encoding,Base64 decode,echo 'dGV4dA==' | base64 -d,Decode base64 text.,,ctf
+ctf-encoding-base64-encode,Ctf,Encoding,Base64 encode,echo -n 'text' | base64,Encode text.,,ctf
+ctf-files-check-file-type,Ctf,Files,Check file type,file file && exiftool file,Inspect file metadata.,,ctf
+ctf-files-find-hidden-strings,Ctf,Files,Find hidden strings,strings file | less,Extract printable strings.,,ctf
+ctf-hashing-hashcat-example,Ctf,Hashing,Hashcat example,hashcat -m 0 hash.txt wordlists/rockyou.txt,Example MD5 hashcat run for CTF use.,,ctf
+ctf-hashing-identify-hash,Ctf,Hashing,Identify hash,hashid 'HASH_HERE',Identify hash type in a CTF.,,ctf
+ctf-hashing-john-wordlist-crack,Ctf,Hashing,John wordlist crack,john --wordlist=wordlists/rockyou.txt hash.txt,Crack lab hash with a permitted wordlist.,,ctf
+ctf-shell-upgrade-python-pty-upgrade,Ctf,Shell Upgrade,Python PTY upgrade,"python3 -c 'import pty; pty.spawn(""/bin/bash"")'",Upgrade a basic lab shell.,,ctf
+ctf-shell-upgrade-tty-stabilize,Ctf,Shell Upgrade,TTY stabilize,stty raw -echo; fg,Stabilize interactive shell after backgrounding.,,ctf
+ctf-shells-netcat-listener,Ctf,Shells,Netcat listener,nc -lvnp {{PORT}},Start a listener for authorized lab callbacks.,PORT,ctf
+ctf-shells-python-http-server,Ctf,Shells,Python HTTP server,python3 -m http.server {{PORT}},Serve files from current directory in a lab.,PORT,ctf
+linux-archives-extract-tar-gz,Linux,Archives,Extract tar.gz,tar -xzf file.tar.gz,Extract a tar.gz archive.,,linux
+linux-basics-current-user,Linux,Basics,Current user,id && whoami,Show current user and groups.,,linux
+linux-basics-system-info,Linux,Basics,System info,uname -a && cat /etc/os-release,Show kernel and distro details.,,linux
+linux-files-find-suid-files,Linux,Files,Find SUID files,find / -perm -4000 -type f 2>/dev/null,Find SUID binaries for authorized privilege escalation practice.,,linux
+linux-files-find-writable-directories,Linux,Files,Find writable directories,find / -writable -type d 2>/dev/null | head -50,List writable directories in a lab machine.,,linux
+linux-network-routes-and-interfaces,Linux,Network,Routes and interfaces,ip addr && ip route,Show interfaces and routes.,,linux
+linux-processes-process-list,Linux,Processes,Process list,ps aux --forest,Review running processes.,,linux
+linux-search-search-for-credentials-keywords,Linux,Search,Search for credentials keywords,grep -RniE 'password|passwd|secret|token' /var/www 2>/dev/null | head -50,Look for common lab credential leaks.,,linux
+linux-services-listening-ports,Linux,Services,Listening ports,ss -tulpen,Show listening TCP/UDP services.,,linux
+linux-transfer-download-with-wget,Linux,Transfer,Download with wget,wget http://{{LHOST}}:{{PORT}}/file -O file,Download from your own lab host.,"LHOST,PORT",linux
+linux-users-readable-passwd,Linux,Users,Readable passwd,cat /etc/passwd,List local user records.,,linux
+linux-users-sudo-privileges,Linux,Users,Sudo privileges,sudo -l,Check allowed sudo commands for current user.,,linux
+recon-dns-dns-lookup,Recon,DNS,DNS lookup,dig {{DOMAIN}},Basic DNS lookup.,DOMAIN,recon
+recon-dns-find-name-servers,Recon,DNS,Find name servers,dig NS {{DOMAIN}} +short,List domain name servers.,DOMAIN,recon
+recon-dns-zone-transfer-test,Recon,DNS,Zone transfer test,dig axfr @{{IP}} {{DOMAIN}},Test zone transfer only on authorized DNS labs.,"DOMAIN,IP",recon
+recon-host-discovery-fast-ping-sweep,Recon,Host Discovery,Fast ping sweep,nmap -sn {{IP}}/24,Discover live hosts in an authorized subnet.,IP,recon
+recon-host-discovery-ping-target,Recon,Host Discovery,Ping target,ping -c 4 {{IP}},Check whether the target host responds to ICMP in a lab.,IP,recon
+recon-port-scanning-full-tcp-scan,Recon,Port Scanning,Full TCP scan,nmap -p- --min-rate 5000 -T4 {{IP}},Scan all TCP ports in a lab environment.,IP,recon
+recon-port-scanning-quick-top-ports-scan,Recon,Port Scanning,Quick top ports scan,nmap -T4 --top-ports 100 {{IP}},Quickly scan common ports.,IP,recon
+recon-port-scanning-service-version-scan,Recon,Port Scanning,Service/version scan,nmap -sV -sC -p {{PORT}} {{IP}},Run default scripts and version detection on selected ports.,"IP,PORT",recon
+recon-udp-scanning-top-udp-scan,Recon,UDP Scanning,Top UDP scan,sudo nmap -sU --top-ports 20 {{IP}},Check common UDP services.,IP,recon
+recon-web-discovery-directory-discovery,Recon,Web Discovery,Directory discovery,ffuf -u http://{{IP}}:{{PORT}}/FUZZ -w wordlists/common.txt,Find common paths using a local wordlist.,"IP,PORT",recon
+recon-web-discovery-http-headers,Recon,Web Discovery,HTTP headers,curl -I http://{{IP}}:{{PORT}},Fetch response headers.,"IP,PORT",recon
+recon-web-discovery-web-title-with-httpx,Recon,Web Discovery,Web title with httpx,httpx -u http://{{IP}}:{{PORT}} -title -status-code -tech-detect,Fingerprint a lab web service.,"IP,PORT",recon
+web-content-discovery-gobuster-directory-scan,Web,Content Discovery,Gobuster directory scan,"gobuster dir -u http://{{IP}}:{{PORT}} -w wordlists/common.txt -x php,txt,html",Discover content on a lab web server.,"IP,PORT",web
+web-content-discovery-recursive-ffuf,Web,Content Discovery,Recursive ffuf,ffuf -u http://{{DOMAIN}}/FUZZ -w wordlists/common.txt -recursion -recursion-depth 2,Recursive content discovery on permitted target.,DOMAIN,web
+web-http-post-form-test,Web,HTTP,POST form test,curl -X POST http://{{IP}}:{{PORT}}/login -d 'username={{USERNAME}}&password={{PASSWORD}}' -i,Send a lab login form request.,"IP,PASSWORD,PORT,USERNAME",web
+web-http-save-response-body,Web,HTTP,Save response body,curl -s http://{{IP}}:{{PORT}}/ -o response.html,Save response for offline review.,"IP,PORT",web
+web-nikto-nikto-basic-scan,Web,Nikto,Nikto basic scan,nikto -h http://{{IP}}:{{PORT}},Run a basic web server check in labs.,"IP,PORT",web
+web-parameters-parameter-fuzzing-get,Web,Parameters,Parameter fuzzing GET,ffuf -u 'http://{{IP}}:{{PORT}}/index.php?FUZZ=test' -w wordlists/params.txt,Discover reflected or accepted GET parameters.,"IP,PORT",web
+web-security-headers-check-security-headers,Web,Security Headers,Check security headers,curl -I https://{{DOMAIN}} | grep -Ei 'strict|content-security|x-frame|x-content|referrer',Review common defensive headers.,DOMAIN,web
+web-tls-tls-quick-check,Web,TLS,TLS quick check,testssl.sh https://{{DOMAIN}},Check TLS configuration when authorized.,DOMAIN,web
+web-virtual-hosts-vhost-fuzzing,Web,Virtual Hosts,Vhost fuzzing,ffuf -u http://{{IP}}/ -H 'Host: FUZZ.{{DOMAIN}}' -w wordlists/subdomains.txt -fs 0,Find virtual hosts in a CTF/lab.,"DOMAIN,IP",web
+web-wordpress-wpscan-enumerate-users,Web,WordPress,WPScan enumerate users,wpscan --url http://{{DOMAIN}} --enumerate u,Enumerate WordPress users in an authorized lab.,DOMAIN,web
+web-wordpress-wpscan-plugins,Web,WordPress,WPScan plugins,wpscan --url http://{{DOMAIN}} --enumerate p,Enumerate plugins in an authorized lab.,DOMAIN,web
+windows-basics-current-user,Windows,Basics,Current user,whoami /all,"Show user, groups, and privileges.",,windows
+windows-basics-system-info,Windows,Basics,System info,systeminfo,Show host and OS details.,,windows
+windows-network-listening-ports,Windows,Network,Listening ports,netstat -ano,Show listening ports and PIDs.,,windows
+windows-network-network-config,Windows,Network,Network config,ipconfig /all && route print,Show network configuration and routes.,,windows
+windows-powershell-download-file,Windows,PowerShell,Download file,"powershell -c ""Invoke-WebRequest -Uri http://{{LHOST}}:{{PORT}}/file -OutFile file""",Download from your own lab host.,"LHOST,PORT",windows
+windows-powershell-find-files-by-name,Windows,PowerShell,Find files by name,"powershell -c ""Get-ChildItem C:\ -Recurse -ErrorAction SilentlyContinue -Filter *config*""",Find config files.,,windows
+windows-powershell-search-text-files,Windows,PowerShell,Search text files,"powershell -c ""Select-String -Path C:\inetpub\wwwroot\* -Pattern 'password','secret','token' -Recurse""",Search web root for lab credential keywords.,,windows
+windows-services-services-list,Windows,Services,Services list,"wmic service get name,displayname,pathname,startmode",Review services and paths.,,windows
+windows-users-local-admins,Windows,Users,Local admins,net localgroup administrators,List local administrators.,,windows
+windows-users-local-users,Windows,Users,Local users,net user,List local users.,,windows

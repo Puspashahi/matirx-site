@@ -1,0 +1,77 @@
+{
+  "total_commands": 67,
+  "duplicates_removed": 0,
+  "sections": {
+    "Api": 10,
+    "Ctf": 12,
+    "Linux": 12,
+    "Recon": 12,
+    "Web": 11,
+    "Windows": 10
+  },
+  "categories_by_section": {
+    "Api": {
+      "CORS": 1,
+      "Discovery": 2,
+      "GraphQL": 1,
+      "HTTP": 2,
+      "IDOR Lab": 1,
+      "JWT": 1,
+      "Methods": 1,
+      "Rate Limit": 1
+    },
+    "Ctf": {
+      "Crypto": 1,
+      "Encoding": 2,
+      "Files": 2,
+      "Hashing": 3,
+      "Shell Upgrade": 2,
+      "Shells": 2
+    },
+    "Linux": {
+      "Archives": 1,
+      "Basics": 2,
+      "Files": 2,
+      "Network": 1,
+      "Processes": 1,
+      "Search": 1,
+      "Services": 1,
+      "Transfer": 1,
+      "Users": 2
+    },
+    "Recon": {
+      "DNS": 3,
+      "Host Discovery": 2,
+      "Port Scanning": 3,
+      "UDP Scanning": 1,
+      "Web Discovery": 3
+    },
+    "Web": {
+      "Content Discovery": 2,
+      "HTTP": 2,
+      "Nikto": 1,
+      "Parameters": 1,
+      "Security Headers": 1,
+      "TLS": 1,
+      "Virtual Hosts": 1,
+      "WordPress": 2
+    },
+    "Windows": {
+      "Basics": 2,
+      "Network": 2,
+      "PowerShell": 3,
+      "Services": 1,
+      "Users": 2
+    }
+  },
+  "placeholder_usage": {
+    "DOMAIN": 18,
+    "TOKEN": 3,
+    "PASSWORD": 2,
+    "USERNAME": 2,
+    "USER_ID": 1,
+    "PORT": 13,
+    "LHOST": 2,
+    "IP": 16
+  }
+}

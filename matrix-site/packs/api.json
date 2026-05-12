@@ -1,0 +1,12 @@
+[
+  {"section":"API","category":"Discovery","title":"Fetch OpenAPI spec","command":"curl -s https://{{DOMAIN}}/openapi.json | jq .","description":"Retrieve and format an API spec where exposed intentionally."},
+  {"section":"API","category":"Discovery","title":"Common API paths","command":"ffuf -u https://{{DOMAIN}}/FUZZ -w wordlists/api-paths.txt -mc all","description":"Discover common API paths in a permitted lab."},
+  {"section":"API","category":"HTTP","title":"GET with bearer token","command":"curl -H 'Authorization: Bearer {{TOKEN}}' https://{{DOMAIN}}/api/me -i","description":"Send an authenticated API request."},
+  {"section":"API","category":"HTTP","title":"POST JSON login","command":"curl -X POST https://{{DOMAIN}}/api/login -H 'Content-Type: application/json' -d '{\"username\":\"{{USERNAME}}\",\"password\":\"{{PASSWORD}}\"}' -i","description":"Send JSON login request in a lab."},
+  {"section":"API","category":"CORS","title":"CORS origin check","command":"curl -H 'Origin: https://evil.example' -I https://{{DOMAIN}}/api/profile","description":"Check CORS response behavior safely."},
+  {"section":"API","category":"Methods","title":"OPTIONS method","command":"curl -X OPTIONS https://{{DOMAIN}}/api/users -i","description":"Check allowed HTTP methods."},
+  {"section":"API","category":"Rate Limit","title":"Simple rate-limit loop","command":"for i in $(seq 1 20); do curl -s -o /dev/null -w '%{http_code}\\n' https://{{DOMAIN}}/api/login; done","description":"Check whether a lab endpoint returns limiting responses."},
+  {"section":"API","category":"IDOR Lab","title":"Change object id manually","command":"curl -H 'Authorization: Bearer {{TOKEN}}' https://{{DOMAIN}}/api/users/{{USER_ID}} -i","description":"Authorized lab test for object-level authorization."},
+  {"section":"API","category":"GraphQL","title":"GraphQL introspection query","command":"curl -X POST https://{{DOMAIN}}/graphql -H 'Content-Type: application/json' -d '{\"query\":\"{__schema{types{name}}}\"}'","description":"Check GraphQL introspection in authorized labs."},
+  {"section":"API","category":"JWT","title":"Decode JWT locally","command":"python3 - <<'PY'\nimport jwt\nprint(jwt.decode('{{TOKEN}}', options={\"verify_signature\": False}))\nPY","description":"Decode token claims locally without verification."}
+]

